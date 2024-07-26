@@ -8,6 +8,8 @@ public class ChatBot {
         System.out.println("");
         String name = askForName(scanner);
         System.out.println("");
+        name = repeatName(scanner, name);
+        System.out.println("");
         int[] age = guessAge(scanner);
         System.out.println("");
         countToNumber(scanner);
@@ -23,7 +25,6 @@ public class ChatBot {
     }
 
     public static void greetUser() {
-        System.out.println("");
         System.out.println("Hello! Welcome to the best ChatBot in the world!");
     }
 
@@ -32,6 +33,18 @@ public class ChatBot {
         String name = scanner.nextLine();
         System.out.println("");
         System.out.println("Pleasure to meet you, " + name + "!");
+        return name;
+    }
+
+    public static String repeatName(Scanner scanner, String name) {
+        System.out.println("Please repeat your name:");
+        String repeatedName = scanner.nextLine();
+        if (!repeatedName.equalsIgnoreCase(name)) {
+            System.out.println("That doesn't match what you entered before. Let's try again.");
+            return repeatName(scanner, name);
+        }
+        System.out.println("");
+        System.out.println("Thank you, " + name + "!");
         return name;
     }
 
@@ -86,7 +99,7 @@ public class ChatBot {
         System.out.println("Let me tell you a story...");
         System.out.println("Once upon a time, there was a person named " + name + ".");
         System.out.println(name + " was " + ageYears + " years and " + ageMonths + " months old.");
-        System.out.println(name + " is using the best ChatBot in the whole wide world...you're welcome.");
+        System.out.println(name + " created the best ChatBot in the whole wide world...you're welcome.");
     }
 
     public static void countToNumber(Scanner scanner) {
