@@ -8,13 +8,13 @@ public class ChatBot {
         System.out.println("");
         String name = askForName(scanner);
         System.out.println("");
-        guessAge(scanner);
+        int[] age = guessAge(scanner);
         System.out.println("");
         countToNumber(scanner);
         System.out.println("");
         testProgrammingKnowledge(scanner);
         System.out.println("");
-        tellStory(name);
+        tellStory(name, age[0], age[1]);
         System.out.println("");
         dayOfWeekPhrase(scanner);
         System.out.println("");
@@ -23,6 +23,7 @@ public class ChatBot {
     }
 
     public static void greetUser() {
+        System.out.println("");
         System.out.println("Hello! Welcome to the best ChatBot in the world!");
     }
 
@@ -34,16 +35,14 @@ public class ChatBot {
         return name;
     }
 
-    public static void guessAge(Scanner scanner) {
+    public static int[] guessAge(Scanner scanner) {
         System.out.println("I can guess your age by asking a few questions.");
         System.out.println("");
 
-        // Step 1: Ask for the birth month
         System.out.println("1. What month were you born in? (Enter the number 1-12)");
         int birthMonth = scanner.nextInt();
         System.out.println("");
 
-        // Step 2: Ask if they remember the 9/11 attacks and their age at that time
         System.out.println("2. Do you remember the 9/11 attacks in 2001? (yes/no)");
         String remember911 = scanner.next();
         int ageDuring911 = 0;
@@ -53,7 +52,6 @@ public class ChatBot {
             System.out.println("");
         }
 
-        // Step 3: Ask if they remember the start of the COVID-19 pandemic and their age at that time
         System.out.println("3. Do you remember the start of the COVID-19 pandemic in 2020? (yes/no)");
         String rememberCovid = scanner.next();
         int ageDuringCovid = 0;
@@ -63,19 +61,16 @@ public class ChatBot {
             System.out.println("");
         }
 
-        // Calculate the current year and month
         int currentYear = 2024;
         int currentMonth = 7;
         int birthYear = 0;
 
-        // Determine the birth year based on their answers
         if (ageDuring911 > 0) {
             birthYear = 2001 - ageDuring911;
         } else if (ageDuringCovid > 0) {
             birthYear = 2020 - ageDuringCovid;
         }
 
-        // Calculate the age in years and months
         int ageYears = currentYear - birthYear;
         int ageMonths = currentMonth - birthMonth;
         if (ageMonths < 0) {
@@ -84,6 +79,14 @@ public class ChatBot {
         }
 
         System.out.println("Based on your answers, I guess you are " + ageYears + " years and " + ageMonths + " months old!");
+        return new int[]{ageYears, ageMonths};
+    }
+
+    public static void tellStory(String name, int ageYears, int ageMonths) {
+        System.out.println("Let me tell you a story...");
+        System.out.println("Once upon a time, there was a person named " + name + ".");
+        System.out.println(name + " was " + ageYears + " years and " + ageMonths + " months old.");
+        System.out.println(name + " is using the best ChatBot in the whole wide world...you're welcome.");
     }
 
     public static void countToNumber(Scanner scanner) {
@@ -107,12 +110,6 @@ public class ChatBot {
         } else {
             System.out.println("Incorrect. The correct answer is String.");
         }
-    }
-
-    public static void tellStory(String name) {
-        System.out.println("Let me tell you a story...");
-        System.out.println("Once upon a time, there was a person named " + name + ".");
-        System.out.println(name + " created the best ChatBot in the whole wide world...you're welcome.");
     }
 
     public static void dayOfWeekPhrase(Scanner scanner) {
