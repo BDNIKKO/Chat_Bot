@@ -37,16 +37,45 @@ public class ChatBot {
     public static void guessAge(Scanner scanner) {
         System.out.println("I can guess your age by asking a few questions.");
         System.out.println("");
-        System.out.println("1. What year were you born?");
-        int birthYear = scanner.nextInt();
-        System.out.println("");
-        System.out.println("2. What month were you born in? (Enter the number 1-12)");
+
+        // Step 1: Ask for the birth month
+        System.out.println("1. What month were you born in? (Enter the number 1-12)");
         int birthMonth = scanner.nextInt();
         System.out.println("");
 
+        // Step 2: Ask if they remember the 9/11 attacks and their age at that time
+        System.out.println("2. Do you remember the 9/11 attacks in 2001? (yes/no)");
+        String remember911 = scanner.next();
+        int ageDuring911 = 0;
+        if (remember911.equalsIgnoreCase("yes")) {
+            System.out.println("How old were you in 2001?");
+            ageDuring911 = scanner.nextInt();
+            System.out.println("");
+        }
+
+        // Step 3: Ask if they remember the start of the COVID-19 pandemic and their age at that time
+        System.out.println("3. Do you remember the start of the COVID-19 pandemic in 2020? (yes/no)");
+        String rememberCovid = scanner.next();
+        int ageDuringCovid = 0;
+        if (rememberCovid.equalsIgnoreCase("yes")) {
+            System.out.println("How old were you in 2020?");
+            ageDuringCovid = scanner.nextInt();
+            System.out.println("");
+        }
+
+        // Calculate the current year and month
         int currentYear = 2024;
         int currentMonth = 7;
+        int birthYear = 0;
 
+        // Determine the birth year based on their answers
+        if (ageDuring911 > 0) {
+            birthYear = 2001 - ageDuring911;
+        } else if (ageDuringCovid > 0) {
+            birthYear = 2020 - ageDuringCovid;
+        }
+
+        // Calculate the age in years and months
         int ageYears = currentYear - birthYear;
         int ageMonths = currentMonth - birthMonth;
         if (ageMonths < 0) {
@@ -56,41 +85,34 @@ public class ChatBot {
 
         System.out.println("Based on your answers, I guess you are " + ageYears + " years and " + ageMonths + " months old!");
     }
+
     public static void countToNumber(Scanner scanner) {
         System.out.println("Enter a number and I will count to it:");
         int number = scanner.nextInt();
-        System.out.println("");
-        for (int i = 1; i <= number; i++) {
+        for (int i = 0; i <= number; i++) {
             System.out.println(i);
-
         }
     }
 
     public static void testProgrammingKnowledge(Scanner scanner) {
         System.out.println("Let's test your programming knowledge.");
         System.out.println("Which data type is used to create a variable that should store text?");
-        System.out.println("(Answer by entering the corresponding number!)");
-        System.out.println("");
         System.out.println("1. String");
         System.out.println("2. int");
-        System.out.println("3. boolean");
+        System.out.println("3. float");
         System.out.println("4. char");
-
-        int answer;
-        do {
-            answer = scanner.nextInt();
-            if (answer != 1) {
-                System.out.println("Incorrect. Try again.");
-            }
-        } while (answer != 1);
-        System.out.println("");
-        System.out.println("Correct! The answer is String.");
+        int answer = scanner.nextInt();
+        if (answer == 1) {
+            System.out.println("Correct!");
+        } else {
+            System.out.println("Incorrect. The correct answer is String.");
+        }
     }
 
     public static void tellStory(String name) {
-        System.out.println("There once was a person named " + name + " who loved tinkering with all things tech.");
-        System.out.println(name + " spent their days solving problems and learning new things.");
-        System.out.println("One day, " + name + " created the best ChatBot in the whole wide world...you're welcome.");
+        System.out.println("Let me tell you a story...");
+        System.out.println("Once upon a time, there was a person named " + name + ".");
+        System.out.println(name + " created the best ChatBot in the whole wide world...you're welcome.");
     }
 
     public static void dayOfWeekPhrase(Scanner scanner) {
